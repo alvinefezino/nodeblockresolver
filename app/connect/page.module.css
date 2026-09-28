@@ -32,7 +32,6 @@
   border: 1px solid rgba(255, 255, 255, 0.16);
   color: #ffffff;
   font-size: 1.3rem;
-  box-shadow: 0 0 24px rgba(255, 255, 255, 0.1);
 }
 
 .pageTitle {
@@ -60,7 +59,6 @@
   border-radius: 12px;
   padding: 0.9rem 1.1rem;
   font-size: 0.95rem;
-  transition: border-color 0.25s ease, box-shadow 0.3s ease, background 0.25s ease;
 }
 .searchInput::placeholder {
   color: rgba(255, 255, 255, 0.45);
@@ -69,7 +67,6 @@
   outline: none;
   background: rgba(255, 255, 255, 0.1);
   border-color: rgba(255, 255, 255, 0.5);
-  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1);
 }
 
 .noResults {
@@ -95,7 +92,7 @@
   gap: 0.6rem;
 }
 
-/* ---------- Glass circle ---------- */
+/* ---------- Glass circle - static, no continuous animations ---------- */
 .circle {
   position: relative;
   aspect-ratio: 1;
@@ -103,11 +100,7 @@
   max-width: 90px;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.07);
-  backdrop-filter: blur(18px) saturate(150%);
-  -webkit-backdrop-filter: blur(18px) saturate(150%);
   border: 1px solid rgba(255, 255, 255, 0.18);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14),
-    0 8px 24px rgba(0, 0, 0, 0.4);
   color: #ffffff;
   font-size: 1.1rem;
   font-weight: 600;
@@ -116,77 +109,27 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  transition: transform 0.5s var(--ease-out), background 0.3s ease,
-    border-color 0.3s ease, text-shadow 0.3s ease;
-}
-
-.circle::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  background: conic-gradient(
-    from var(--angle),
-    transparent 0deg,
-    transparent 230deg,
-    rgba(255, 255, 255, 0.95) 330deg,
-    transparent 360deg
-  );
-  -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 2.5px), #000 calc(100% - 2px));
-  mask: radial-gradient(farthest-side, transparent calc(100% - 2.5px), #000 calc(100% - 2px));
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  animation: spinAngle 2.2s linear infinite;
-  pointer-events: none;
 }
 
 .circle:hover {
-  transform: scale(1.14) translateY(-6px);
   background: rgba(255, 255, 255, 0.12);
-  border-color: rgba(255, 255, 255, 0.4);
-  text-shadow: 0 0 18px rgba(255, 255, 255, 0.7);
-  animation: ringPulse 1.6s ease-out infinite;
+  border-color: rgba(255, 255, 255, 0.3);
 }
-.circle:hover::before { opacity: 1; }
-.circle:active { transform: scale(0.96); }
-
-@keyframes spinAngle {
-  to { --angle: 360deg; }
-}
-@keyframes ringPulse {
-  0% {
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14),
-      0 10px 30px rgba(255, 255, 255, 0.12), 0 0 0 0 rgba(255, 255, 255, 0.3);
-  }
-  100% {
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14),
-      0 10px 30px rgba(255, 255, 255, 0.12), 0 0 0 20px rgba(255, 255, 255, 0);
-  }
-}
+.circle:active { transform: scale(0.97); }
 
 .circleImage {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.7s var(--ease-out), filter 0.4s ease;
-}
-.circle:hover .circleImage {
-  transform: scale(1.18);
-  filter: brightness(1.15);
 }
 
 .circleLabel {
   color: rgba(255, 255, 255, 0.9);
   font-size: 0.85rem;
   text-align: center;
-  transition: color 0.3s ease, transform 0.4s var(--ease-out),
-    letter-spacing 0.4s var(--ease-out), text-shadow 0.3s ease;
 }
 .circleWrapper:hover .circleLabel {
   color: #ffffff;
-  transform: translateY(4px);
-  letter-spacing: 0.04em;
-  text-shadow: 0 0 14px rgba(255, 255, 255, 0.5);
 }
 
 /* ---------- Modal ---------- */
@@ -201,7 +144,6 @@
   justify-content: center;
   z-index: 50;
   padding: 1rem;
-  animation: fadeIn 0.3s ease both;
 }
 
 .modalCard {
@@ -218,16 +160,6 @@
   max-width: 460px;
   max-height: 90vh;
   overflow-y: auto;
-  animation: modalIn 0.5s var(--ease-out) both;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-@keyframes modalIn {
-  from { opacity: 0; transform: translateY(24px) scale(0.95); }
-  to { opacity: 1; transform: none; }
 }
 
 .closeBtn {
@@ -241,11 +173,9 @@
   line-height: 1;
   cursor: pointer;
   padding: 0.25rem 0.5rem;
-  transition: transform 0.4s var(--ease-out), color 0.25s ease;
 }
 .closeBtn:hover {
   color: #ffffff;
-  transform: rotate(90deg) scale(1.2);
 }
 
 .modalHeader {
@@ -261,7 +191,6 @@
   border-radius: 50%;
   object-fit: cover;
   border: 1px solid rgba(255, 255, 255, 0.25);
-  box-shadow: 0 0 24px rgba(255, 255, 255, 0.12);
 }
 
 .modalLogoFallback {
@@ -301,7 +230,6 @@
   font-size: 0.95rem;
   cursor: pointer;
   position: relative;
-  transition: color 0.25s ease;
 }
 .tabBtn::after {
   content: "";
@@ -312,7 +240,6 @@
   height: 2px;
   background: #ffffff;
   transform: scaleX(0);
-  transition: transform 0.3s var(--ease-out);
 }
 .tabBtn:hover { color: rgba(255, 255, 255, 0.85); }
 
@@ -333,17 +260,11 @@
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
-  animation: fieldIn 0.5s var(--ease-out) backwards;
-}
-@keyframes fieldIn {
-  from { opacity: 0; transform: translateY(12px); }
-  to { opacity: 1; transform: none; }
 }
 
 .field label {
   color: rgba(255, 255, 255, 0.6);
   font-size: 0.85rem;
-  transition: color 0.25s ease;
 }
 .field:focus-within label { color: #ffffff; }
 
@@ -355,17 +276,11 @@
   border-radius: 10px;
   padding: 0.85rem 1rem;
   font-size: 0.95rem;
-  transition: border-color 0.25s ease, box-shadow 0.3s ease, background 0.25s ease;
 }
 
 .field textarea {
   min-height: 130px;
   resize: vertical;
-}
-
-.field input:hover,
-.field textarea:hover {
-  border-color: rgba(255, 255, 255, 0.3);
 }
 
 .field input::placeholder,
@@ -378,7 +293,6 @@
   outline: none;
   background: rgba(255, 255, 255, 0.08);
   border-color: rgba(255, 255, 255, 0.5);
-  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1);
 }
 
 .formHint {
@@ -388,8 +302,6 @@
 }
 
 .submitBtn {
-  position: relative;
-  overflow: hidden;
   background: linear-gradient(135deg, #ffffff, #e5e5e5, #a3a3a3);
   color: #000000;
   border: none;
@@ -399,27 +311,7 @@
   font-size: 0.95rem;
   letter-spacing: 0.02em;
   cursor: pointer;
-  box-shadow: 0 0 30px rgba(255, 255, 255, 0.15);
-  transition: transform 0.35s var(--ease-out), box-shadow 0.35s ease;
 }
-.submitBtn::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: -60%;
-  width: 40%;
-  background: linear-gradient(105deg, transparent, rgba(255, 255, 255, 0.95), transparent);
-  transform: skewX(-20deg);
-  transition: left 0.8s var(--ease-out);
-  pointer-events: none;
-}
-.submitBtn:hover:not(:disabled) {
-  transform: translateY(-2px);
-  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.1), 0 14px 40px rgba(255, 255, 255, 0.28);
-}
-.submitBtn:hover:not(:disabled)::before { left: 130%; }
-.submitBtn:active:not(:disabled) { transform: scale(0.98); }
 .submitBtn:disabled { opacity: 0.6; cursor: not-allowed; }
 
 .cancelBtn {
@@ -431,14 +323,11 @@
   font-weight: 600;
   font-size: 0.9rem;
   cursor: pointer;
-  transition: transform 0.3s var(--ease-out), background 0.3s ease, border-color 0.3s ease;
 }
 .cancelBtn:hover {
-  transform: translateY(-2px);
   background: rgba(255, 255, 255, 0.1);
   border-color: rgba(255, 255, 255, 0.3);
 }
-.cancelBtn:active { transform: scale(0.97); }
 
 .securityNotice {
   display: flex;
@@ -480,7 +369,7 @@
   margin: 0;
 }
 
-/* ---------- Loading ---------- */
+/* ---------- Loading - static, no infinite spin ---------- */
 .loadingWrap {
   display: flex;
   flex-direction: column;
@@ -513,16 +402,13 @@
   margin-bottom: 2rem;
 }
 
-/* Static slowly-rotating dashed outer ring */
 .spinnerDashedRing {
   position: absolute;
   inset: 0;
   border-radius: 50%;
   border: 2px dashed rgba(255, 255, 255, 0.25);
-  animation: slowSpin 8s linear infinite;
 }
 
-/* Spinning teal/blue arc */
 .spinnerArc {
   position: absolute;
   inset: 6px;
@@ -530,40 +416,20 @@
   border: 3px solid transparent;
   border-bottom-color: #00c6ff;
   border-left-color: #0072ff;
-  box-shadow: 0 0 18px rgba(0, 198, 255, 0.4);
-  animation: spin 1.2s linear infinite;
 }
 
-/* Dark centre disc */
 .spinnerCore {
   position: absolute;
   inset: 20px;
   border-radius: 50%;
   background: radial-gradient(circle at 40% 35%, rgba(0, 198, 255, 0.25), rgba(0, 50, 80, 0.9));
   border: 1px solid rgba(0, 198, 255, 0.3);
-  box-shadow: inset 0 0 20px rgba(0, 198, 255, 0.2);
 }
 
-@keyframes slowSpin {
-  to { transform: rotate(360deg); }
-}
-
-@keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-/* Re-triggers the fade every time key={loadingStep} changes in JSX */
 .loadingText {
   color: rgba(255, 255, 255, 0.75);
   font-size: 1rem;
   padding-bottom: 1.5rem;
-  animation: stepFadeIn 0.5s ease both;
-}
-
-@keyframes stepFadeIn {
-  from { opacity: 0; transform: translateY(6px); }
-  to { opacity: 1; transform: none; }
 }
 
 /* ---------- Error — red panel style ---------- */
@@ -623,7 +489,6 @@
   letter-spacing: 0.06em;
   cursor: pointer;
   padding: 0.4rem 0;
-  transition: color 0.2s ease;
 }
 
 .tryAgainBtn:hover {

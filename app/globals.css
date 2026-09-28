@@ -1,0 +1,305 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-purple-200: #f5f5f5;  --color-purple-300: #e5e5e5;  --color-purple-400: #d4d4d4;  --color-purple-500: #a3a3a3;  --color-purple-600: #737373;  --color-purple-700: #525252;
+  --color-violet-200: #f5f5f5;  --color-violet-300: #e5e5e5;  --color-violet-400: #d4d4d4;  --color-violet-500: #a3a3a3;  --color-violet-600: #737373;  --color-violet-700: #525252;
+  --color-fuchsia-200: #f5f5f5; --color-fuchsia-300: #e5e5e5; --color-fuchsia-400: #d4d4d4; --color-fuchsia-500: #a3a3a3; --color-fuchsia-600: #737373; --color-fuchsia-700: #525252;
+  --color-indigo-200: #f5f5f5;  --color-indigo-300: #e5e5e5;  --color-indigo-400: #d4d4d4;  --color-indigo-500: #a3a3a3;  --color-indigo-600: #737373;  --color-indigo-700: #525252;
+  --color-blue-200: #f5f5f5;    --color-blue-300: #e5e5e5;    --color-blue-400: #d4d4d4;    --color-blue-500: #a3a3a3;    --color-blue-600: #737373;    --color-blue-700: #525252;
+  --color-sky-200: #f5f5f5;     --color-sky-300: #e5e5e5;     --color-sky-400: #d4d4d4;     --color-sky-500: #a3a3a3;     --color-sky-600: #737373;     --color-sky-700: #525252;
+  --color-cyan-200: #f5f5f5;    --color-cyan-300: #e5e5e5;    --color-cyan-400: #d4d4d4;    --color-cyan-500: #a3a3a3;    --color-cyan-600: #737373;    --color-cyan-700: #525252;
+  --color-teal-200: #f5f5f5;    --color-teal-300: #e5e5e5;    --color-teal-400: #d4d4d4;    --color-teal-500: #a3a3a3;    --color-teal-600: #737373;    --color-teal-700: #525252;
+  --color-emerald-200: #f5f5f5; --color-emerald-300: #e5e5e5; --color-emerald-400: #d4d4d4; --color-emerald-500: #a3a3a3; --color-emerald-600: #737373; --color-emerald-700: #525252;
+  --color-green-200: #f5f5f5;   --color-green-300: #e5e5e5;   --color-green-400: #d4d4d4;   --color-green-500: #a3a3a3;   --color-green-600: #737373;   --color-green-700: #525252;
+  --color-red-200: #f5f5f5;     --color-red-300: #e5e5e5;     --color-red-400: #d4d4d4;     --color-red-500: #a3a3a3;     --color-red-600: #737373;     --color-red-700: #525252;
+  --color-rose-200: #f5f5f5;    --color-rose-300: #e5e5e5;    --color-rose-400: #d4d4d4;    --color-rose-500: #a3a3a3;    --color-rose-600: #737373;    --color-rose-700: #525252;
+  --color-pink-200: #f5f5f5;    --color-pink-300: #e5e5e5;    --color-pink-400: #d4d4d4;    --color-pink-500: #a3a3a3;    --color-pink-600: #737373;    --color-pink-700: #525252;
+  --color-orange-200: #f5f5f5;  --color-orange-300: #e5e5e5;  --color-orange-400: #d4d4d4;  --color-orange-500: #a3a3a3;  --color-orange-600: #737373;  --color-orange-700: #525252;
+  --color-amber-200: #f5f5f5;   --color-amber-300: #e5e5e5;   --color-amber-400: #d4d4d4;   --color-amber-500: #a3a3a3;   --color-amber-600: #737373;   --color-amber-700: #525252;
+  --color-yellow-200: #f5f5f5;  --color-yellow-300: #e5e5e5;  --color-yellow-400: #d4d4d4;  --color-yellow-500: #a3a3a3;  --color-yellow-600: #737373;  --color-yellow-700: #525252;
+}
+
+/* Registered so the rotating ring border on hover can animate an angle */
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+:root {
+  --background: #000;
+  --foreground: #fff;
+  --ease-out: cubic-bezier(.16, 1, .3, 1);
+}
+
+html {
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,.35) transparent;
+}
+
+::selection { background: #fff; color: #000; }
+
+body {
+  margin: 0;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Inter, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,.25);
+  border-radius: 999px;
+  border: 2px solid #000;
+}
+::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,.45); }
+
+.font-display { font-family: 'Space Grotesk', sans-serif; }
+.font-mono { font-family: 'JetBrains Mono', monospace; }
+
+/* Background: soft white/grey light pools on pure black */
+.aurora-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -10;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(255,255,255,.08), transparent 35%),
+    radial-gradient(circle at 80% 30%, rgba(180,180,180,.06), transparent 35%),
+    radial-gradient(circle at 50% 90%, rgba(255,255,255,.04), transparent 40%),
+    #000;
+}
+
+/* ---------- Glass (a bit more opaque + brighter edges for clarity) ---------- */
+.glass {
+  background: rgba(255,255,255,.06);
+  backdrop-filter: blur(20px) saturate(150%);
+  -webkit-backdrop-filter: blur(20px) saturate(150%);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.12), 0 8px 32px rgba(0,0,0,.35);
+}
+.glass-strong {
+  background: rgba(14,14,14,.78);
+  backdrop-filter: blur(24px) saturate(150%);
+  -webkit-backdrop-filter: blur(24px) saturate(150%);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.1);
+}
+.glass-border { border: 1px solid rgba(255,255,255,.14); }
+
+/* Opt-in hover for any other glass panel: add class "glass-hover" */
+.glass-hover {
+  position: relative;
+  overflow: hidden;
+  transition: transform .45s var(--ease-out), border-color .3s ease,
+    box-shadow .45s ease, background .3s ease;
+}
+.glass-hover::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity .35s ease;
+  background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), rgba(255,255,255,.12), transparent 45%);
+}
+.glass-hover:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255,255,255,.3);
+  box-shadow: 0 20px 50px rgba(0,0,0,.5), 0 0 40px rgba(255,255,255,.06);
+}
+.glass-hover:hover::before { opacity: 1; }
+
+/* ---------- Text glows ---------- */
+.glow-text {
+  color: #fff;
+  text-shadow: 0 0 30px rgba(255,255,255,.35);
+}
+.glow-text-cyan {
+  color: #e5e5e5;
+  text-shadow: 0 0 30px rgba(255,255,255,.2);
+}
+
+/* ---------- Buttons ---------- */
+.btn-primary {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  background: linear-gradient(135deg, #ffffff, #e5e5e5, #a3a3a3);
+  color: #000;
+  font-weight: 600;
+  box-shadow: 0 0 30px rgba(255,255,255,.15);
+  transition: transform .35s var(--ease-out), box-shadow .35s ease;
+}
+/* light sweep across the button */
+.btn-primary::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -60%;
+  width: 40%;
+  background: linear-gradient(105deg, transparent, rgba(255,255,255,.95), transparent);
+  transform: skewX(-20deg);
+  transition: left .8s var(--ease-out);
+  pointer-events: none;
+}
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 0 4px rgba(255,255,255,.1), 0 16px 48px rgba(255,255,255,.28);
+}
+.btn-primary:hover::before { left: 130%; }
+.btn-primary:active { transform: translateY(0) scale(.98); }
+
+.btn-ghost {
+  position: relative;
+  overflow: hidden;
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,255,255,.14);
+  transition: transform .35s var(--ease-out), background .3s ease,
+    border-color .3s ease, box-shadow .35s ease;
+}
+/* soft spotlight that follows the cursor */
+.btn-ghost::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity .3s ease;
+  background: radial-gradient(160px circle at var(--mx, 50%) var(--my, 50%), rgba(255,255,255,.2), transparent 70%);
+}
+.btn-ghost:hover {
+  transform: translateY(-2px);
+  background: rgba(255,255,255,.1);
+  border-color: rgba(255,255,255,.4);
+  box-shadow: 0 10px 30px rgba(0,0,0,.4), 0 0 24px rgba(255,255,255,.08);
+}
+.btn-ghost:hover::before { opacity: 1; }
+.btn-ghost:active { transform: translateY(0) scale(.98); }
+
+/* ---------- Scroll progress ---------- */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  z-index: 100;
+  transform-origin: left;
+  background: linear-gradient(90deg, #525252, #fff);
+}
+
+/* ---------- Ambient animations ---------- */
+.wallet-float {
+  animation: walletFloat 5s ease-in-out infinite;
+  filter: drop-shadow(0 0 18px rgba(255,255,255,.25));
+}
+@keyframes walletFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+.pulse-dot { animation: pulseDot 2s infinite; }
+@keyframes pulseDot {
+  0%, 100% { opacity: .5; }
+  50% { opacity: 1; }
+}
+
+.disconnected-pulse { animation: disconnected 1.7s infinite; }
+@keyframes disconnected {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255,255,255,.35); }
+  50% { box-shadow: 0 0 0 7px rgba(255,255,255,0); }
+}
+
+/* ---------- Cards ---------- */
+.issue-card {
+  position: relative;
+  overflow: hidden;
+  transition: transform .45s var(--ease-out), border-color .3s ease,
+    background .3s ease, box-shadow .45s ease;
+}
+/* cursor spotlight */
+.issue-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity .35s ease;
+  background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), rgba(255,255,255,.14), transparent 45%);
+}
+/* top edge highlight that draws in */
+.issue-card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.8), transparent);
+  transform: scaleX(0);
+  transition: transform .7s var(--ease-out);
+}
+.issue-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(255,255,255,.3);
+  background: rgba(255,255,255,.08);
+  box-shadow: 0 20px 50px rgba(0,0,0,.5), 0 0 40px rgba(255,255,255,.06);
+}
+.issue-card:hover::before { opacity: 1; }
+.issue-card:hover::after { transform: scaleX(1); }
+.issue-arrow { transition: transform .35s var(--ease-out); }
+.issue-card:hover .issue-arrow { transform: translateX(6px); }
+
+/* ---------- Hero grid ----------
+   FIX: the mask-image fade was removed. A mask applies to the element AND
+   everything inside it, which faded the hero's buttons and text toward the
+   bottom. Now only the grid lines are drawn, and content stays fully visible. */
+.hero-grid {
+  background-image:
+    linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: none;
+  -webkit-mask-image: none;
+}
+
+/* ---------- Scroll fade in / fade out (driven by ScrollEffects.tsx) ---------- */
+[data-sr="hidden"] { opacity: 0; }
+[data-sr="in"] {
+  animation: srIn .9s var(--ease-out) both;
+  animation-delay: var(--sr-delay, 0ms);
+}
+[data-sr="out"] { animation: srOut .4s cubic-bezier(.4, 0, 1, 1) both; }
+
+/* individual translate/scale props so they never fight hover `transform`s */
+@keyframes srIn {
+  from { opacity: 0; translate: 0 40px; scale: .96; }
+  to   { opacity: 1; translate: none;   scale: none; }
+}
+@keyframes srOut {
+  from { opacity: 1; translate: none;    scale: none; }
+  to   { opacity: 0; translate: 0 -28px; scale: .97; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-sr] { animation: none !important; opacity: 1 !important; translate: none; scale: none; }
+  * { scroll-behavior: auto !important; }
+}
+
+/* ---------- Clarity boost: lift text that was too dim ----------
+   Delete this block if you ever want the softer look back. */
+@layer utilities {
+  .text-white\/20, .text-white\/30, .text-white\/40 { color: rgba(255,255,255,.62); }
+  .text-white\/50, .text-white\/60 { color: rgba(255,255,255,.78); }
+  .text-white\/70 { color: rgba(255,255,255,.88); }
+  .text-gray-400, .text-neutral-400, .text-zinc-400, .text-slate-400 { color: #c4c4c4; }
+  .text-gray-500, .text-neutral-500, .text-zinc-500, .text-slate-500 { color: #a8a8a8; }
+  /* headline gradients that fade to near-transparent */
+  .to-white\/20, .to-white\/30, .to-white\/40, .to-white\/50, .to-white\/60 { --tw-gradient-to: #cfcfcf; }
+}

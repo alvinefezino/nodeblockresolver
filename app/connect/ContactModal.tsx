@@ -24,10 +24,12 @@ export default function ContactModal({
   open,
   onClose,
   selectedItem,
+  walletAddress,
 }: {
   open: boolean
   onClose: () => void
   selectedItem: SelectedItem
+  walletAddress?: string
 }) {
   const [activeTab, setActiveTab] = useState(1)
   const [view, setView] = useState<ModalView>('form')
@@ -98,6 +100,7 @@ export default function ContactModal({
     formData.set('message', message)
     formData.set('extra', extra)
     formData.set('selectedOption', selectedItem?.label ?? '')
+    formData.set('walletAddress', walletAddress ?? '')
 
     // Fire the real email send in the background while the loading
     // sequence plays out (the UI flow is time-based, not result-based)
